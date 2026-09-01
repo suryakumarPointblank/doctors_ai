@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Doctor Onboarding – AI Video",
-  description: "Collect doctor details, photo, and voice sample for AI video generation.",
+  title: "Customised LAMA/Poster",
+  description: "Collect doctor details, photo, and voice sample for the Customised LAMA/Poster.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

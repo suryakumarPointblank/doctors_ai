@@ -8,10 +8,20 @@ type Submission = {
   hq: string;
   empId: string;
   zone: string;
+  zoneManager: string;
   doctorName: string;
-  doctorDegree: string;
-  activity: string;
+  doctorUniqueId: string;
+  doctorMobile: string;
+  doctorEmail: string;
+  city: string;
+  cityType: string;
+  practiceType: string;
+  yearsExperience: number;
+  monthlyPcvPotential: number;
+  pneubevax14Usage: number;
   inputNeeded: string;
+  regionalLanguage: string;
+  script: string;
   photoUrl: string;
   voiceUrl: string;
   voiceSeconds: number;
@@ -178,13 +188,21 @@ export default function AdminPage() {
                 />
 
                 <div className="grid flex-1 grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-4">
-                  <Info label="Doctor" value={`${s.doctorName}, ${s.doctorDegree}`} />
+                  <Info label="Doctor" value={s.doctorName} />
+                  <Info label="Doctor Unique ID" value={s.doctorUniqueId} />
+                  <Info label="Mobile" value={s.doctorMobile} />
+                  <Info label="Email" value={s.doctorEmail} />
                   <Info label="ABE Name" value={s.abeName} />
                   <Info label="HQ" value={s.hq} />
                   <Info label="EMP ID" value={s.empId} />
-                  <Info label="Zone" value={s.zone} />
-                  <Info label="Activity" value={s.activity} />
+                  <Info label="Zone" value={`${s.zone} (${s.zoneManager})`} />
+                  <Info label="City" value={`${s.city} (${s.cityType})`} />
+                  <Info label="Type of Practice" value={s.practiceType} />
+                  <Info label="Years of Experience" value={String(s.yearsExperience)} />
+                  <Info label="Monthly PCV Potential" value={String(s.monthlyPcvPotential)} />
+                  <Info label="Pneubevax 14 Current Usage" value={String(s.pneubevax14Usage)} />
                   <Info label="Input Needed" value={s.inputNeeded} />
+                  <Info label="Regional Language" value={s.regionalLanguage} />
                   <Info label="Consent" value={s.consent ? "Yes" : "No"} />
                   <Info label="Submitted" value={new Date(s.submittedAt).toLocaleString()} />
                 </div>
@@ -196,6 +214,13 @@ export default function AdminPage() {
                 </span>
                 <audio controls src={s.voiceUrl} className="h-9" />
               </div>
+
+              {s.script && (
+                <div className="mt-3 rounded-lg bg-zinc-50 px-3 py-2">
+                  <div className="text-xs text-zinc-400">Script</div>
+                  <p className="mt-1 whitespace-pre-line text-sm text-zinc-700">{s.script}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
