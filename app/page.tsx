@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Quote,
   Upload,
-  User,
 } from "lucide-react";
 import {
   ZONES,
@@ -259,17 +258,10 @@ export default function Home() {
       <div className="mx-auto w-full max-w-3xl">
         {/* Hero */}
         <div className="overflow-hidden rounded-3xl bg-zinc-900 px-6 py-8 text-white shadow-lg shadow-zinc-900/10 sm:px-10 sm:py-10">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
-              <ImageIcon className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Customised LAMA/Poster</h1>
-              <p className="mt-0.5 text-sm text-zinc-300">
-                Onboard a doctor for their AI-generated LAMA / poster
-              </p>
-            </div>
-          </div>
+          <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Customised LAMA/Poster</h1>
+          <p className="mt-0.5 text-sm text-zinc-300">
+            Onboard a doctor for their AI-generated LAMA / poster
+          </p>
         </div>
 
         {/* Progress */}
@@ -406,16 +398,17 @@ export default function Home() {
             {errors.photo && <p className="mt-1 text-xs text-red-600">{errors.photo}</p>}
 
             {/* Reference framing guide */}
-            <div className="mt-3 flex items-center gap-4 rounded-xl border border-zinc-200 bg-zinc-50 p-3">
-              <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-white">
-                <User className="h-10 w-10 text-zinc-400" />
-              </div>
-              <p className="text-xs leading-5 text-zinc-600">
-                <span className="font-medium text-zinc-800">Reference: </span>
+            <div className="mt-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4">
+              <p className="text-xs font-medium text-zinc-800">Reference framing</p>
+              <p className="mt-1 text-xs leading-5 text-zinc-600">
                 The photo should have the doctor properly centered in the frame, facing the
                 camera, with their full head and shoulders clearly visible — similar to the
-                placement shown here.
+                example below.
               </p>
+              <div className="mx-auto mt-3 w-full max-w-sm overflow-hidden rounded-lg border border-zinc-300 bg-white sm:max-w-md">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/doc_ref.avif" alt="Reference: doctor centered in frame" className="w-full object-cover" />
+              </div>
             </div>
           </div>
 
