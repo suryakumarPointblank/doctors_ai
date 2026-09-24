@@ -15,6 +15,8 @@ type Submission = {
   doctorUniqueId: string;
   doctorMobile: string;
   doctorEmail: string;
+  doctorQualification: string;
+  doctorSpeciality: string;
   city: string;
   cityType: string;
   practiceType: string;
@@ -42,6 +44,8 @@ const EXPORT_COLUMNS: { key: keyof Submission; label: string }[] = [
   { key: "doctorUniqueId", label: "Doctor Unique ID" },
   { key: "doctorMobile", label: "Doctor Mobile" },
   { key: "doctorEmail", label: "Doctor Email" },
+  { key: "doctorQualification", label: "Doctor Qualification" },
+  { key: "doctorSpeciality", label: "Doctor Speciality" },
   { key: "city", label: "City" },
   { key: "cityType", label: "City Type" },
   { key: "practiceType", label: "Practice Type" },
@@ -318,6 +322,8 @@ export default function QaPage() {
                           <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-4">
                             <Info label="Mobile" value={s.doctorMobile} />
                             <Info label="Email" value={s.doctorEmail} />
+                            <Info label="Qualification" value={s.doctorQualification} />
+                            <Info label="Speciality" value={s.doctorSpeciality} />
                             <Info label="HQ" value={s.hq} />
                             <Info label="EMP ID" value={s.empId} />
                             <Info label="Zone Manager" value={s.zoneManager} />

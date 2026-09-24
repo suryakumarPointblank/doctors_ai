@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
     const doctorUniqueId   = (body.doctorUniqueId as string | undefined)?.trim();
     const doctorMobile     = (body.doctorMobile   as string | undefined)?.trim();
     const doctorEmail      = (body.doctorEmail    as string | undefined)?.trim();
+    const doctorQualification = (body.doctorQualification as string | undefined)?.trim();
+    const doctorSpeciality    = (body.doctorSpeciality    as string | undefined)?.trim();
 
     const city              = (body.city              as string | undefined)?.trim();
     const cityType          = (body.cityType          as string | undefined)?.trim();
@@ -45,6 +47,7 @@ export async function POST(req: NextRequest) {
     if (
       !abeName || !hq || !empId || !zone ||
       !doctorName || !doctorUniqueId || !doctorMobile || !doctorEmail ||
+      !doctorQualification || !doctorSpeciality ||
       !city || !cityType || !practiceType ||
       Number.isNaN(yearsExperience) || Number.isNaN(monthlyPcvPotential) || Number.isNaN(pneubevax14Usage) ||
       !inputNeeded || !regionalLanguage ||
@@ -130,6 +133,8 @@ export async function POST(req: NextRequest) {
         doctorUniqueId,
         doctorMobile,
         doctorEmail,
+        doctorQualification,
+        doctorSpeciality,
         city,
         cityType,
         practiceType,

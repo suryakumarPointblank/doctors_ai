@@ -36,6 +36,8 @@ export default function Home() {
   const [doctorUniqueId, setDoctorUniqueId] = useState("");
   const [doctorMobile, setDoctorMobile] = useState("");
   const [doctorEmail, setDoctorEmail]   = useState("");
+  const [doctorQualification, setDoctorQualification] = useState("");
+  const [doctorSpeciality, setDoctorSpeciality] = useState("");
 
   const [city, setCity]                 = useState("");
   const [cityType, setCityType]         = useState("");
@@ -73,7 +75,7 @@ export default function Home() {
   const progress = useMemo(() => {
     const requiredValues = [
       abeName, hq, empId, zone,
-      doctorName, doctorUniqueId, doctorMobile, doctorEmail,
+      doctorName, doctorUniqueId, doctorMobile, doctorEmail, doctorQualification, doctorSpeciality,
       city, cityType, practiceType, yearsExperience, monthlyPcvPotential, pneubevax14Usage,
       inputNeeded, regionalLanguage,
       photoFile ? "1" : "", voiceBlob ? "1" : "", consent ? "1" : "",
@@ -82,6 +84,7 @@ export default function Home() {
     return Math.round((filled / requiredValues.length) * 100);
   }, [
     abeName, hq, empId, zone, doctorName, doctorUniqueId, doctorMobile, doctorEmail,
+    doctorQualification, doctorSpeciality,
     city, cityType, practiceType, yearsExperience, monthlyPcvPotential, pneubevax14Usage,
     inputNeeded, regionalLanguage, photoFile, voiceBlob, consent,
   ]);
@@ -173,6 +176,8 @@ export default function Home() {
       e.doctorMobile = "Enter a valid 10-digit mobile number";
     if (!/^\S+@\S+\.\S+$/.test(doctorEmail.trim()))
       e.doctorEmail = "Enter a valid email address";
+    if (!doctorQualification.trim()) e.doctorQualification = "Doctor's qualification is required";
+    if (!doctorSpeciality.trim())    e.doctorSpeciality = "Doctor's speciality is required";
 
     if (!city.trim())          e.city = "City is required";
     if (!cityType)             e.cityType = "Select metro or non-metro";
@@ -270,7 +275,7 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           abeName, hq, empId, zone, zoneManager: ZONE_MANAGERS[zone] ?? "",
-          doctorName, doctorUniqueId, doctorMobile, doctorEmail,
+          doctorName, doctorUniqueId, doctorMobile, doctorEmail, doctorQualification, doctorSpeciality,
           city, cityType, practiceType, yearsExperience, monthlyPcvPotential, pneubevax14Usage,
           inputNeeded, regionalLanguage, script: voiceScript,
           consent, voiceSeconds, photoUrl, voiceUrl,
@@ -394,6 +399,14 @@ export default function Home() {
 
             <Field label="Doctor's email ID" error={errors.doctorEmail}>
               <input type="email" className={inputCls(errors.doctorEmail)} value={doctorEmail} onChange={(e) => setDoctorEmail(e.target.value)} />
+            </Field>
+
+            <Field label="Doctor's qualification" error={errors.doctorQualification}>
+              <input className={inputCls(errors.doctorQualification)} value={doctorQualification} onChange={(e) => setDoctorQualification(e.target.value)} />
+            </Field>
+
+            <Field label="Doctor's speciality" error={errors.doctorSpeciality}>
+              <input className={inputCls(errors.doctorSpeciality)} value={doctorSpeciality} onChange={(e) => setDoctorSpeciality(e.target.value)} />
             </Field>
 
             <Field label="City" error={errors.city}>

@@ -14,6 +14,8 @@ type Submission = {
   doctorUniqueId: string;
   doctorMobile: string;
   doctorEmail: string;
+  doctorQualification: string;
+  doctorSpeciality: string;
   city: string;
   cityType: string;
   practiceType: string;
@@ -264,6 +266,8 @@ export default function AdminPage() {
                   <Info label="Doctor Unique ID" value={s.doctorUniqueId} />
                   <Info label="Mobile" value={s.doctorMobile} />
                   <Info label="Email" value={s.doctorEmail} />
+                  <Info label="Qualification" value={s.doctorQualification} />
+                  <Info label="Speciality" value={s.doctorSpeciality} />
                   <Info label="ABE Name" value={s.abeName} />
                   <Info label="HQ" value={s.hq} />
                   <Info label="EMP ID" value={s.empId} />
