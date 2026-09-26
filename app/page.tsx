@@ -26,6 +26,42 @@ import { reportClientError } from "@/lib/clientLogger";
 
 const MIN_VOICE_SECONDS = 30;
 
+const IMAGE_EXT_CONTENT_TYPES: Record<string, string> = {
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  heic: "image/heic",
+  heif: "image/heif",
+  webp: "image/webp",
+  gif: "image/gif",
+};
+
+const AUDIO_EXT_CONTENT_TYPES: Record<string, string> = {
+  webm: "audio/webm",
+  m4a: "audio/mp4",
+  mp4: "audio/mp4",
+  mp3: "audio/mpeg",
+  wav: "audio/wav",
+  aac: "audio/aac",
+  ogg: "audio/ogg",
+  opus: "audio/ogg",
+  amr: "audio/amr",
+  "3gp": "audio/3gpp",
+  "3gpp": "audio/3gpp",
+  caf: "audio/x-caf",
+};
+
+function resolveContentType(kind: "photo" | "voice", file: File | Blob, fileName: string): string {
+  const prefix = kind === "photo" ? "image/" : "audio/";
+  if (file.type && file.type.startsWith(prefix)) return file.type;
+
+  const ext = fileName.split(".").pop()?.toLowerCase() ?? "";
+  const byExtension = (kind === "photo" ? IMAGE_EXT_CONTENT_TYPES : AUDIO_EXT_CONTENT_TYPES)[ext];
+  if (byExtension) return byExtension;
+
+  return kind === "photo" ? "image/jpeg" : "audio/webm";
+}
+
 export default function Home() {
   const [abeName, setAbeName]           = useState("");
   const [hq, setHq]                     = useState("");
@@ -209,7 +245,7 @@ export default function Home() {
     onProgress: (pct: number) => void
   ): Promise<string> =>
     new Promise((resolve, reject) => {
-      const contentType = file.type || (kind === "photo" ? "image/jpeg" : "audio/webm");
+      const contentType = resolveContentType(kind, file, fileName);
 
       fetch("/api/upload-url", {
         method: "POST",
